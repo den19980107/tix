@@ -6,7 +6,7 @@ import React from 'react'
 export default function StationSelector({ ...props }: SelectProps) {
   return (
     <Select {...props}>
-      <SelectTrigger className="w-[240px]">
+      <SelectTrigger className="w-full md:w-[300px]">
         <SelectValue placeholder="南港" />
       </SelectTrigger>
       <SelectContent>

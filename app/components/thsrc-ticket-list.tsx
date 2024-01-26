@@ -15,13 +15,13 @@ export default function ThsrcTicketList({ orders }: ThsrcTicketListProps) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>高鐵訂單 ({orders.length})</CardTitle>
+        <CardTitle className="text-lg">高鐵訂單 ({orders.length})</CardTitle>
       </CardHeader>
       <CardContent>
-        <Carousel className="m-10">
+        <Carousel className="md:mx-10">
           <CarouselContent>
             {orders.map(order => (
-              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="basis-1/1 lg:basis-1/2 xl:basis-1/3">
                 <ThsrcCard ticket={order}></ThsrcCard>
               </CarouselItem>
             ))}

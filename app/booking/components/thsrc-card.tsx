@@ -10,7 +10,7 @@ type ThsrcCardProps = {
 
 export default function ThsrcCard({ ticket }: ThsrcCardProps) {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[250px] md:w-[350px]">
       <CardHeader>
         <CardTitle className="flex text-lg">
           {getThsrcStationName(ticket.from)}

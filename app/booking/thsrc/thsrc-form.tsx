@@ -59,7 +59,7 @@ export default function ThsrcForm() {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8">
-        <div className="flex">
+        <div className="grid gap-7 md:grid-cols-2">
           <FormField
             control={form.control}
             name="from"
@@ -106,7 +106,7 @@ export default function ThsrcForm() {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-full md:w-[300px] pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -136,7 +136,7 @@ export default function ThsrcForm() {
           )}
         />
 
-        <div className="flex">
+        <div className="grid gap-7 md:grid-cols-2">
           <FormField
             control={form.control}
             name="startTime"
@@ -144,7 +144,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最早出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-[240px]" {...field} />
+                  <Input type="time" className="w-full md:w-[300px]" {...field} />
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間早的票
@@ -160,7 +160,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最晚出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-[240px]" {...field} />
+                  <Input type="time" className="w-full md:w-[300px]" {...field} />
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間晚的票
@@ -171,49 +171,47 @@ export default function ThsrcForm() {
           />
         </div>
 
-        <div className="flex">
-          <FormField
-            control={form.control}
-            name="execDay"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel className="mb-2" style={{ height: "17px" }}>搶票日</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "yyyy-MM-dd")
-                        ) : (
-                          <span>選擇一個日期</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormDescription>
-                  選擇高鐵開放搶票的日期
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="execDay"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel className="mb-2" style={{ height: "17px" }}>搶票日</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full md:w-[300px] pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "yyyy-MM-dd")
+                      ) : (
+                        <span>選擇一個日期</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormDescription>
+                選擇高鐵開放搶票的日期
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit">送出</Button>
       </form>
     </Form >
