@@ -11,22 +11,47 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import StationSelector from "./station-selector";
-import { useRouter } from "next/navigation";
 import { ThsrcTicket } from "@/types/thsrc-ticket";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ThsrcForm() {
   const router = useRouter()
-  const form = useForm<ThsrcTicket>()
+  const { toast } = useToast()
+  const now = new Date()
+  const nowHour = now.getHours()
+  const defaultValues: ThsrcTicket = {
+    from: "1",
+    to: "12",
+    departureDay: now,
+    startTime: `${nowHour}:00`,
+    endTime: `${nowHour + 2}:00`,
+    execDay: now,
+  }
+  const form = useForm<ThsrcTicket>({
+    defaultValues: defaultValues
+  })
 
   const onSubmit = async () => {
+    const ticket = form.getValues()
     const res = await fetch("/api/booking/thsrc", {
       method: "POST",
-      body: JSON.stringify(form.getValues())
+      body: JSON.stringify(ticket)
     })
 
     if (res.ok) {
-      router.push("/")
+      toast({
+        title: "新增成功",
+        description: `已新增 ${format(ticket.departureDay, "yyyy-MM-dd")} 由 ${ticket.from} 至 ${ticket.to} 的訂單`
+      })
+    } else {
+      const json = await res.json()
+      toast({
+        title: "新曾失敗",
+        description: `錯誤訊息：${json.error}`
+      })
     }
+    router.push("/")
   }
 
   return (
@@ -86,7 +111,7 @@ export default function ThsrcForm() {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, "yyyy-MM-dd")
                       ) : (
                         <span>選擇一個日期</span>
                       )}
@@ -99,9 +124,6 @@ export default function ThsrcForm() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
                     initialFocus
                   />
                 </PopoverContent>
@@ -167,7 +189,7 @@ export default function ThsrcForm() {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          format(field.value, "yyyy-MM-dd")
                         ) : (
                           <span>選擇一個日期</span>
                         )}
@@ -180,9 +202,6 @@ export default function ThsrcForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
                       initialFocus
                     />
                   </PopoverContent>

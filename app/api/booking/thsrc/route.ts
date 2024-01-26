@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma"
 import { ThsrcTicket } from "@/types/thsrc-ticket"
+import { revalidatePath } from "next/cache"
 
 export async function POST(req: Request) {
   const order: ThsrcTicket = await req.json()
@@ -17,8 +18,9 @@ export async function POST(req: Request) {
       },
     })
   } catch (err) {
-    return new Response(`create order failed, err: ${err}`, { status: 500 })
+    return new Response(`{"error": "create order failed, err: ${err}"}`, { status: 500 })
   }
 
+  revalidatePath("/")
   return new Response("OK")
 }

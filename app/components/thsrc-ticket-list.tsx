@@ -8,6 +8,10 @@ type ThsrcTicketListProps = {
   orders: ThsrcTicket[]
 }
 export default function ThsrcTicketList({ orders }: ThsrcTicketListProps) {
+  if (orders.length == 0) {
+    return <></>
+  }
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -17,7 +21,7 @@ export default function ThsrcTicketList({ orders }: ThsrcTicketListProps) {
         <Carousel className="m-10">
           <CarouselContent>
             {orders.map(order => (
-              <CarouselItem className="md:basis-1/3 lg:basis-1/3">
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                 <ThsrcCard ticket={order}></ThsrcCard>
               </CarouselItem>
             ))}
