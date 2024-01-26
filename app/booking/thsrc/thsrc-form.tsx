@@ -25,12 +25,17 @@ type ThsrcFormValues = {
 export default function ThsrcForm() {
   const form = useForm<ThsrcFormValues>()
 
+  const onSubmit = async () => {
+    fetch("/api/booking/thsrc", {
+      method: "POST",
+      body: JSON.stringify(form.getValues())
+    })
+  }
+
   return (
     <Form {...form}>
       <form
-        action={async (formData) => {
-          await createOrder(formData)
-        }}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8">
         <div className="flex">
           <FormField
@@ -40,7 +45,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>出發站</FormLabel>
                 <FormControl>
-                  <StationSelector onOpenChange={field.onChange} defaultValue={field.value}></StationSelector>
+                  <StationSelector onValueChange={field.onChange} defaultValue={field.value}></StationSelector>
                 </FormControl>
                 <FormDescription>
                   選擇您要從哪裡搭乘高鐵出發
@@ -56,7 +61,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>抵達站</FormLabel>
                 <FormControl>
-                  <StationSelector onOpenChange={field.onChange} defaultValue={field.value}></StationSelector>
+                  <StationSelector onValueChange={field.onChange} defaultValue={field.value}></StationSelector>
                 </FormControl>
                 <FormDescription>
                   選擇您要搭乘高鐵前往哪裏
