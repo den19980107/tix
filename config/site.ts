@@ -1,13 +1,17 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
+  name: "Tix",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+    "訂票系統",
   mainNav: [
     {
-      title: "Home",
+      title: "首頁",
       href: "/",
+    },
+    {
+      title: "訂票",
+      href: "/booking",
     },
   ],
   links: {
