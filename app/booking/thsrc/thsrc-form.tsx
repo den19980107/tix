@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import StationSelector from "./station-selector";
 
 type ThsrcFormValues = {
   from: string
@@ -31,38 +32,40 @@ export default function ThsrcForm() {
           await createOrder(formData)
         }}
         className="space-y-8">
-        <FormField
-          control={form.control}
-          name="from"
-          render={({ field }) => (
-            <FormItem className="flex-1">
-              <FormLabel>出發站</FormLabel>
-              <FormControl>
-                <Input placeholder="南港" {...field} />
-              </FormControl>
-              <FormDescription>
-                選擇您要從哪裡搭乘高鐵出發
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="to"
-          render={({ field }) => (
-            <FormItem className="flex-1">
-              <FormLabel>抵達站</FormLabel>
-              <FormControl>
-                <Input placeholder="台南" {...field} />
-              </FormControl>
-              <FormDescription>
-                選擇您要搭乘高鐵前往哪裏
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex">
+          <FormField
+            control={form.control}
+            name="from"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>出發站</FormLabel>
+                <FormControl>
+                  <StationSelector onOpenChange={field.onChange} defaultValue={field.value}></StationSelector>
+                </FormControl>
+                <FormDescription>
+                  選擇您要從哪裡搭乘高鐵出發
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="to"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>抵達站</FormLabel>
+                <FormControl>
+                  <StationSelector onOpenChange={field.onChange} defaultValue={field.value}></StationSelector>
+                </FormControl>
+                <FormDescription>
+                  選擇您要搭乘高鐵前往哪裏
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
@@ -108,38 +111,41 @@ export default function ThsrcForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="startTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>最早出發時間</FormLabel>
-              <FormControl>
-                <Input type="time" {...field} />
-              </FormControl>
-              <FormDescription>
-                系統自動搶票時，不會選取比這個時間更早的票
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="endTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>最晚出發時間</FormLabel>
-              <FormControl>
-                <Input type="time" {...field} />
-              </FormControl>
-              <FormDescription>
-                系統自動搶票時，不會選取比這個時間更晚的票
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
+        <div className="flex">
+          <FormField
+            control={form.control}
+            name="startTime"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>最早出發時間</FormLabel>
+                <FormControl>
+                  <Input type="time" className="w-[240px]" {...field} />
+                </FormControl>
+                <FormDescription>
+                  系統不會搶比這個時間早的票
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="endTime"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>最晚出發時間</FormLabel>
+                <FormControl>
+                  <Input type="time" className="w-[240px]" {...field} />
+                </FormControl>
+                <FormDescription>
+                  系統不會搶比這個時間晚的票
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <div className="flex">
           <FormField
