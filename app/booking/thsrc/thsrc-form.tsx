@@ -3,7 +3,6 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { createOrder } from "@/actions/create-order"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -12,24 +11,30 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import StationSelector from "./station-selector";
+import { useRouter } from "next/navigation";
 
-type ThsrcFormValues = {
+export type ThsrcFormValues = {
   from: string
   to: string
   departureDay: Date
-  startTime: number
-  endTime: number
+  startTime: string
+  endTime: string
   execDay: Date
 }
 
 export default function ThsrcForm() {
+  const router = useRouter()
   const form = useForm<ThsrcFormValues>()
 
   const onSubmit = async () => {
-    fetch("/api/booking/thsrc", {
+    const res = await fetch("/api/booking/thsrc", {
       method: "POST",
       body: JSON.stringify(form.getValues())
     })
+
+    if (res.ok) {
+      router.push("/")
+    }
   }
 
   return (

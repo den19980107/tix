@@ -16,14 +16,15 @@ model User {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  from      String   @db.VarChar(255)
-  to        String   @db.VarChar(255)
-  startTime DateTime
-  endTime   DateTime
-  execTime  DateTime
-  creator   User     @relation(fields: [creatorId], references: [id])
-  creatorId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  from         String   @db.VarChar(255)
+  to           String   @db.VarChar(255)
+  departureDay DateTime
+  startTime    String
+  endTime      String
+  execDay      DateTime
+  creator      User     @relation(fields: [creatorId], references: [id])
+  creatorId    Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
