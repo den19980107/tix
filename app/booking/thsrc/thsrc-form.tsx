@@ -12,19 +12,11 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import StationSelector from "./station-selector";
 import { useRouter } from "next/navigation";
-
-export type ThsrcFormValues = {
-  from: string
-  to: string
-  departureDay: Date
-  startTime: string
-  endTime: string
-  execDay: Date
-}
+import { ThsrcTicket } from "@/types/thsrc-ticket";
 
 export default function ThsrcForm() {
   const router = useRouter()
-  const form = useForm<ThsrcFormValues>()
+  const form = useForm<ThsrcTicket>()
 
   const onSubmit = async () => {
     const res = await fetch("/api/booking/thsrc", {

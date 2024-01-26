@@ -1,8 +1,8 @@
-import { ThsrcFormValues } from "@/app/booking/thsrc/thsrc-form"
 import prisma from "@/lib/prisma"
+import { ThsrcTicket } from "@/types/thsrc-ticket"
 
 export async function POST(req: Request) {
-  const order: ThsrcFormValues = await req.json()
+  const order: ThsrcTicket = await req.json()
 
   try {
     await prisma.order.create({
