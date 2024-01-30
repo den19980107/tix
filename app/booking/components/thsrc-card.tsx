@@ -1,5 +1,7 @@
+import { deleteThsrcOrder } from '@/app/actions/booking/thsrc'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { FormButton } from '@/components/ui/form-button'
 import { getThsrcStationName, ThsrcTicket } from '@/types/thsrc-ticket'
 import { ArrowRightIcon } from 'lucide-react'
 import React from 'react'
@@ -48,9 +50,10 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">取消</Button>
-        <Button>編輯</Button>
+      <CardFooter className="flex justify-end">
+        <form action={async () => deleteThsrcOrder(ticket.id)}>
+          <FormButton>刪除</FormButton>
+        </form>
       </CardFooter>
     </Card>
   )

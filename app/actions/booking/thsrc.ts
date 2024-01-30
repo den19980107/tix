@@ -1,15 +1,13 @@
 'use server'
 
 import prisma from "@/lib/prisma"
+import { ActionError } from "@/types/action"
 import { CreateThsrcTicket, ThsrcTicket } from "@/types/thsrc-ticket"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/dist/client/components/navigation"
 
-type CreateThsrcTicketError = {
-  error?: string
-}
 
-export async function createThsrcOrder(ticket: ThsrcTicket): Promise<CreateThsrcTicketError | null> {
+export async function createThsrcOrder(ticket: CreateThsrcTicket): Promise<ActionError> {
   const order: CreateThsrcTicket = {
     from: ticket.from,
     to: ticket.to,
@@ -27,7 +25,7 @@ export async function createThsrcOrder(ticket: ThsrcTicket): Promise<CreateThsrc
     })
   } catch (err) {
     return {
-      error: `create order failed, err: ${err}`
+      message: `create order failed, err: ${err}`
     }
   }
 
@@ -35,6 +33,15 @@ export async function createThsrcOrder(ticket: ThsrcTicket): Promise<CreateThsrc
   redirect("/")
 }
 
-export async function test() {
-  await new Promise(r => setTimeout(r, 2000));
+export async function deleteThsrcOrder(id: number): Promise<ActionError> {
+  try {
+    await prisma.order.delete({ where: { id: id } })
+  } catch (err) {
+    return {
+      message: `delete order failed, err: ${err}`
+    }
+  }
+
+  revalidatePath("/")
+  return null
 }

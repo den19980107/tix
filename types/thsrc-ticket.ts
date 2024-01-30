@@ -1,10 +1,12 @@
 export type ThsrcTicket = {
+  id: number
   from: string
   to: string
   departureDay: Date
   startTime: string
   endTime: string
   execDay: Date
+  creatorId: number
 }
 
 export type CreateThsrcTicket = {

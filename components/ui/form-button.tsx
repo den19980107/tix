@@ -1,17 +1,15 @@
 'use client'
 import { LoaderIcon } from 'lucide-react'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { useFormStatus } from 'react-dom'
-import { Button } from './button'
+import { Button, ButtonProps } from './button'
 
-type FormButtonProps = {
-}
 
-export default function FormButton({ children }: PropsWithChildren<FormButtonProps>) {
+export const FormButton = React.forwardRef<HTMLButtonElement, ButtonProps>(({ children, ...props }) => {
   const { pending } = useFormStatus()
   return (
-    <Button type="submit" disabled={pending}>
+    <Button type="submit" disabled={pending} {...props}>
       {pending ? <div className="animate-spin"><LoaderIcon /></div> : children}
     </Button>
   )
-}
+})
