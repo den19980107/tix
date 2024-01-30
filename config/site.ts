@@ -13,6 +13,10 @@ export const siteConfig = {
       title: "訂票",
       href: "/booking",
     },
+    {
+      title: "設定",
+      href: "/setting",
+    },
   ],
   links: {
     twitter: "https://twitter.com/shadcn",
