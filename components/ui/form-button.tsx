@@ -13,3 +13,6 @@ export const FormButton = React.forwardRef<HTMLButtonElement, ButtonProps>(({ ch
     </Button>
   )
 })
+
+
+FormButton.displayName = "FormButton"
