@@ -20,3 +20,10 @@ npx create-next-app -e https://github.com/shadcn/next-template
 ## License
 
 Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+
+### Build
+
+```bash
+docker build --platform=linux/amd64  -t den19980107/tix .
+docker push den19980107/tix:latest
+```
