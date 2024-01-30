@@ -7,6 +7,16 @@ export type ThsrcTicket = {
   execDay: Date
 }
 
+export type CreateThsrcTicket = {
+  from: string
+  to: string
+  departureDay: Date
+  startTime: string
+  endTime: string
+  execDay: Date
+  creatorId: number
+}
+
 export function getThsrcStationName(stationId: string): string {
   switch (stationId) {
     case "1":

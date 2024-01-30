@@ -1,6 +1,5 @@
 'use client';
 
-import React from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -12,53 +11,50 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import StationSelector from "./station-selector";
 import { ThsrcTicket } from "@/types/thsrc-ticket";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { createThsrcOrder } from "@/app/actions/booking/thsrc";
+import FormButton from "@/components/ui/form-button";
 
 export default function ThsrcForm() {
-  const router = useRouter()
   const { toast } = useToast()
   const now = new Date()
-  const nowHour = now.getHours()
+  const { startTime, endTime } = getStartAndEndTime(now)
   const defaultValues: ThsrcTicket = {
     from: "1",
     to: "12",
     departureDay: now,
-    startTime: `${nowHour}:00`,
-    endTime: `${nowHour + 2}:00`,
+    startTime: startTime,
+    endTime: endTime,
     execDay: now,
   }
+
   const form = useForm<ThsrcTicket>({
     defaultValues: defaultValues
   })
 
-  const onSubmit = async () => {
+  const onAction = async () => {
     const ticket = form.getValues()
-    const res = await fetch("/api/booking/thsrc", {
-      method: "POST",
-      body: JSON.stringify(ticket)
-    })
+    const err = await createThsrcOrder(ticket)
 
-    if (res.ok) {
+    if (err) {
+      toast({
+        title: "新曾失敗",
+        description: `錯誤訊息：${err.error}`
+      })
+    } else {
       toast({
         title: "新增成功",
         description: `已新增 ${format(ticket.departureDay, "yyyy-MM-dd")} 由 ${ticket.from} 至 ${ticket.to} 的訂單`
       })
-    } else {
-      const json = await res.json()
-      toast({
-        title: "新曾失敗",
-        description: `錯誤訊息：${json.error}`
-      })
     }
-    router.push("/")
   }
 
+
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8">
+    <form
+      action={onAction}
+      className="space-y-8">
+      <Form {...form}>
         <div className="grid gap-7 md:grid-cols-2">
           <FormField
             control={form.control}
@@ -212,8 +208,49 @@ export default function ThsrcForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">送出</Button>
-      </form>
-    </Form >
+        <FormButton>
+          送出
+        </FormButton>
+      </Form >
+    </form>
   )
+}
+
+
+type GetStartAndEndHourTime = {
+  startTime: string,
+  endTime: string,
+}
+
+const getStartAndEndTime = (date: Date): GetStartAndEndHourTime => {
+  let startHour = date.getHours()
+  let endHour = startHour + 2
+
+  const result: GetStartAndEndHourTime = {
+    startTime: "",
+    endTime: ""
+  }
+
+  if (startHour >= 24) {
+    startHour = startHour - 24
+  }
+
+  if (endHour >= 24) {
+    endHour = endHour - 24
+  }
+
+
+  if (startHour < 10) {
+    result.startTime = `0${startHour}:00`
+  } else {
+    result.startTime = `${startHour}:00`
+  }
+
+  if (endHour < 10) {
+    result.endTime = `0${endHour}:00`
+  } else {
+    result.endTime = `${endHour}:00`
+  }
+
+  return result
 }
