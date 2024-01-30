@@ -13,23 +13,31 @@ export default function ThsrcTicketList({ orders }: ThsrcTicketListProps) {
   }
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="text-lg">高鐵訂單 ({orders.length})</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Carousel className="md:mx-10">
-          <CarouselContent>
-            {orders.map(order => (
-              <CarouselItem className="basis-1/1 lg:basis-1/2 xl:basis-1/3">
-                <ThsrcCard ticket={order}></ThsrcCard>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </CardContent>
-    </Card>
+    <div>
+      <Card className="hidden lg:block lg:w-full">
+        <CardHeader>
+          <CardTitle className="text-lg">高鐵訂單 ({orders.length})</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Carousel className="md:mx-10">
+            <CarouselContent>
+              {orders.map((order, index) => (
+                <CarouselItem key={index} className="basis-1/1 lg:basis-1/2 xl:basis-1/3">
+                  <ThsrcCard ticket={order}></ThsrcCard>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </CardContent>
+      </Card>
+      <div className="flex flex-col gap-y-4 lg:hidden">
+        <h3 className="text-lg font-semibold leading-none tracking-tight">高鐵訂單</h3>
+        {orders.map((order, index) => (
+          <ThsrcCard key={index} ticket={order} className="w-full"></ThsrcCard>
+        ))}
+      </div>
+    </div>
   )
 }

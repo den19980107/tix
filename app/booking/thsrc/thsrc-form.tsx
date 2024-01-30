@@ -38,7 +38,7 @@ export default function ThsrcForm() {
 
     if (err) {
       toast({
-        title: "新曾失敗",
+        title: "新增失敗",
         description: `錯誤訊息：${err.error}`
       })
     } else {

@@ -5,12 +5,13 @@ import { ArrowRightIcon } from 'lucide-react'
 import React from 'react'
 
 type ThsrcCardProps = {
+  className?: string
   ticket: ThsrcTicket
 }
 
-export default function ThsrcCard({ ticket }: ThsrcCardProps) {
+export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
   return (
-    <Card className="w-[250px] md:w-[350px]">
+    <Card className={className} >
       <CardHeader>
         <CardTitle className="flex text-lg">
           {getThsrcStationName(ticket.from)}
