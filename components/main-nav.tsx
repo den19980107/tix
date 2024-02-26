@@ -30,7 +30,7 @@ export function MainNav({ items }: MainNavProps) {
             {items?.map(
               (item, index) =>
                 item.href && (
-                  <DialogClose asChild>
+                  <DialogClose asChild key={index}>
                     <Link
                       key={index}
                       href={item.href}

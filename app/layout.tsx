@@ -36,10 +36,6 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession();
 
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
-
   return (
     <>
       <html lang="tw" suppressHydrationWarning>
