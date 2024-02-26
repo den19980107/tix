@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma"
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import ThsrcTicketList from "./components/thsrc-ticket-list"
 import PageHeader from "./page-header"
 
