@@ -1,5 +1,6 @@
 'use client'
 import { createUser } from '@/app/actions/auth/register'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { FormButton } from '@/components/ui/form-button'
 import { Input } from '@/components/ui/input'
@@ -96,14 +97,15 @@ export default function RegisterForm() {
           <FormButton type="submit" className="w-full mb-2">
             註冊
           </FormButton>
-          <FormDescription className="mt-2">
+          <FormDescription className="mt-2 mb-2">
             已經有帳號了嗎?
           </FormDescription>
-          <FormButton type="button" variant="secondary" className="w-full" >
+
+          <Button asChild className="w-full" variant="outline">
             <Link href="/auth/signin">
               登入
             </Link>
-          </FormButton>
+          </Button>
         </div>
       </Form>
     </form >

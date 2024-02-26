@@ -1,11 +1,14 @@
 'use client'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { FormButton } from '@/components/ui/form-button'
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from '@/components/ui/input'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from '@/components/ui/use-toast'
+import { redirect } from 'next/navigation'
 
 export default function SignInForm() {
 
@@ -13,9 +16,18 @@ export default function SignInForm() {
     defaultValues: { username: "", password: "" }
   })
 
-  const onAction = () => {
+  const onAction = async () => {
     const credential = form.getValues()
-    signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: "/" })
+    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: "/", redirect: false })
+    if (res?.error) {
+      toast({
+        title: "登入失敗",
+        description: res.error,
+      })
+      return
+    }
+
+    redirect("/")
   }
   return (
     <form
@@ -52,14 +64,14 @@ export default function SignInForm() {
           <FormButton type="submit" className="w-full mb-2">
             登入
           </FormButton>
-          <FormDescription className="mt-2">
+          <FormDescription className="mt-2 mb-2">
             還沒有帳號嗎?
           </FormDescription>
-          <FormButton type="button" variant="secondary" className="w-full" >
+          <Button asChild className="w-full" variant="outline">
             <Link href="/auth/register">
               註冊
             </Link>
-          </FormButton>
+          </Button>
         </div>
       </Form>
     </form >
