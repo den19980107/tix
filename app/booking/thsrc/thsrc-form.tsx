@@ -14,8 +14,15 @@ import { CreateThsrcTicket } from "@/types/thsrc-ticket";
 import { useToast } from "@/components/ui/use-toast";
 import { createThsrcOrder } from "@/app/actions/booking/thsrc";
 import { FormButton } from "@/components/ui/form-button";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function ThsrcForm() {
+  const { data: session } = useSession()
+  if (!session || !session.user) {
+    redirect("/auth/login")
+  }
+
   const { toast } = useToast()
   const now = new Date()
   const { startTime, endTime } = getStartAndEndTime(now)
@@ -26,7 +33,7 @@ export default function ThsrcForm() {
     startTime: startTime,
     endTime: endTime,
     execDay: now,
-    creatorId: 1,
+    creatorId: session?.user?.id,
   }
 
   const form = useForm<CreateThsrcTicket>({
