@@ -49,13 +49,13 @@ export default function SignInForm() {
         />
 
         <div className="mt-2">
-          <FormButton className="w-full mb-2">
+          <FormButton type="submit" className="w-full mb-2">
             登入
           </FormButton>
           <FormDescription className="mt-2">
             還沒有帳號嗎?
           </FormDescription>
-          <FormButton variant="secondary" className="w-full" >
+          <FormButton type="button" variant="secondary" className="w-full" >
             <Link href="/auth/register">
               註冊
             </Link>

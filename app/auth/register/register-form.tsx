@@ -93,13 +93,13 @@ export default function RegisterForm() {
         />
 
         <div className="mt-2">
-          <FormButton className="w-full mb-2">
+          <FormButton type="submit" className="w-full mb-2">
             註冊
           </FormButton>
           <FormDescription className="mt-2">
             已經有帳號了嗎?
           </FormDescription>
-          <FormButton variant="secondary" className="w-full" >
+          <FormButton type="button" variant="secondary" className="w-full" >
             <Link href="/auth/signin">
               登入
             </Link>

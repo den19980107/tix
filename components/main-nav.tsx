@@ -9,10 +9,11 @@ import { Button } from "./ui/button"
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@radix-ui/react-dialog"
 
 interface MainNavProps {
+  isLogin: boolean
   items?: NavItem[]
 }
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav({ items, isLogin }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
       <Dialog>
@@ -27,7 +28,7 @@ export function MainNav({ items }: MainNavProps) {
             <span className="inline-block font-bold">{siteConfig.name}</span>
           </Link>
           <nav className="flex gap-6 flex-col ml-8">
-            {items?.map(
+            {isLogin && items?.map(
               (item, index) =>
                 item.href && (
                   <DialogClose asChild key={index}>
@@ -53,7 +54,7 @@ export function MainNav({ items }: MainNavProps) {
 
       {items?.length ? (
         <nav className="hidden sm:flex gap-6">
-          {items?.map(
+          {isLogin && items?.map(
             (item, index) =>
               item.href && (
                 <Link
