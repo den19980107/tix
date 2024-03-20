@@ -2,9 +2,10 @@
 
 import prisma from "@/lib/prisma";
 import { ActionError } from "@/types/action";
-import { CreateUser } from "@/types/auth";
+import { CreateUser, UpdateUser } from "@/types/auth";
 import { redirect } from "next/navigation";
 import { hash } from 'bcrypt'
+import { revalidatePath } from "next/cache";
 
 const saltRounds = 10;
 
@@ -23,4 +24,27 @@ export async function createUser(user: CreateUser): Promise<ActionError> {
   }
 
   redirect("/auth/signin")
+}
+
+export async function updateUser(user: UpdateUser): Promise<ActionError> {
+  try {
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        username: user.username,
+        idNumber: user.idNumber,
+        phoneNumber: user.phoneNumber,
+      }
+    })
+
+    revalidatePath("/setting/profile")
+    redirect("/setting/profile")
+
+  } catch (err) {
+    return {
+      message: `update user failed, err: ${err}`
+    }
+  }
 }

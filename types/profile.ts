@@ -1,5 +1,5 @@
 export type UpdateProfile = {
   username: string
-  id: string
+  idNumber: string
   phoneNumber: string
 }
