@@ -1,11 +1,7 @@
 import Alert from '@/app/components/alert'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import prisma from '@/lib/prisma'
-import { getThsrcStationName } from '@/types/thsrc-ticket'
-import { format } from 'date-fns'
 import React from 'react'
-import OrderPageHeader from '../../components/order-page-header'
+import CaptchaForm from './captcha-form'
 
 interface ThsrcOrderProps {
   params: ThsrcOrderParams
@@ -34,12 +30,7 @@ export default async function ThsrcOrderPage({ params }: ThsrcOrderProps) {
   }
 
   return (
-    <div className="flex flex-col">
-      <OrderPageHeader title={`${getThsrcStationName(order.from)} 至 ${getThsrcStationName(order.to)}`} subTitle={format(order.departureDay, "yyyy-MM-dd")}></OrderPageHeader>
-      <img src={`data:image/jpeg;base64,${order.captcha}`} className="w-full mb-4" />
-      <Input placeholder="請輸入驗證碼" className="mb-4"></Input>
-      <Button>送出</Button>
-    </div >
+    <CaptchaForm order={order}></CaptchaForm>
   )
 }
 
