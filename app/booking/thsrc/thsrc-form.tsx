@@ -34,6 +34,8 @@ export default function ThsrcForm() {
     endTime: endTime,
     execDay: now,
     creatorId: session?.user?.id,
+    captcha: "",
+    jsessionId: ""
   }
 
   const form = useForm<CreateThsrcTicket>({

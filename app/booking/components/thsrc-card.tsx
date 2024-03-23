@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { FormButton } from '@/components/ui/form-button'
 import { getThsrcStationName, ThsrcTicket } from '@/types/thsrc-ticket'
 import { ArrowRightIcon } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 type ThsrcCardProps = {
@@ -50,7 +51,10 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex justify-between">
+        <Button variant="secondary">
+          <Link href={`/order/thsrc/${ticket.id}`}>輸入驗證碼</Link>
+        </Button>
         <form action={async () => deleteThsrcOrder(ticket.id)}>
           <FormButton>刪除</FormButton>
         </form>

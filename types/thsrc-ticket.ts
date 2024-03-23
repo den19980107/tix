@@ -7,6 +7,8 @@ export type ThsrcTicket = {
   endTime: string
   execDay: Date
   creatorId: number
+  captcha: string
+  jsessionId: string
 }
 
 export type CreateThsrcTicket = {
@@ -17,6 +19,8 @@ export type CreateThsrcTicket = {
   endTime: string
   execDay: Date
   creatorId: number
+  captcha: string
+  jsessionId: string
 }
 
 export function getThsrcStationName(stationId: string): string {
