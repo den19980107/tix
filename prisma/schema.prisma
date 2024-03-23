@@ -29,4 +29,6 @@ model Order {
   creatorId    Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  captcha      String
+  jsessionId   String
 }
