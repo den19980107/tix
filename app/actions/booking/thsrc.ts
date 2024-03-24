@@ -8,6 +8,7 @@ import { redirect } from "next/dist/client/components/navigation"
 
 
 export async function createThsrcOrder(ticket: CreateThsrcTicket): Promise<ActionError> {
+  console.log(`create thsrc order with ${JSON.stringify(ticket)}`)
   try {
     await prisma.order.create({
       data: ticket,

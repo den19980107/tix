@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { getServerSession } from "next-auth"
 import SessionProvider from "@/components/session-provider"
 import SiteFooter from "@/components/site-footer"
+import { authOptions } from "./api/auth/[...nextauth]/authOptions"
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +34,7 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <>

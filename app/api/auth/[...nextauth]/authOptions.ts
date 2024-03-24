@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { AuthOptions } from "next-auth"
+import { encode, decode } from 'next-auth/jwt'
 import Credentials from "next-auth/providers/credentials";
 import { compare } from 'bcrypt'
 
@@ -10,6 +11,7 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt"
   },
+  jwt: { encode, decode },
   providers: [
     Credentials({
       id: "credentials",
