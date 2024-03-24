@@ -10,7 +10,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { getServerSession } from "next-auth"
 import SessionProvider from "@/components/session-provider"
 import SiteFooter from "@/components/site-footer"
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: {

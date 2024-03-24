@@ -12,6 +12,7 @@ export const authOptions: AuthOptions = {
   },
   providers: [
     Credentials({
+      id: "credentials",
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
       // `credentials` is used to generate a form on the sign in page.

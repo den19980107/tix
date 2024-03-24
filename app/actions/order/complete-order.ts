@@ -12,6 +12,8 @@ export async function completeOrder(data: CompleteOrder): Promise<ActionError> {
     body: JSON.stringify(data)
   })
 
+  console.log(`complete order with api: ${apiUrl} payload: ${data}`)
+
   const json = await res.json()
 
   if (res.status != 200) {
