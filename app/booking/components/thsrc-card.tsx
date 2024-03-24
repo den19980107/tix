@@ -16,34 +16,34 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
   return (
     <Card className={className} >
       <CardHeader>
+        <CardDescription>{formatDate(ticket.departureDay)}</CardDescription>
         <CardTitle className="flex text-lg">
           {getThsrcStationName(ticket.from)}
-          <ArrowRightIcon></ArrowRightIcon>
+          <ArrowRightIcon className="mx-2"></ArrowRightIcon>
           {getThsrcStationName(ticket.to)}
         </CardTitle>
-        <CardDescription>{formatDate(ticket.departureDay)}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div
-          className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-        >
-          <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+        <div className="flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-6">
           <div className="space-y-1">
             <p className="text-sm font-medium leading-none">
-              出發時間
+              最早出發時間
             </p>
             <p className="text-sm text-muted-foreground">
-              {ticket.startTime} ~ {ticket.endTime}
+              {ticket.startTime}
             </p>
           </div>
-        </div>
-        <div
-          className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-        >
-          <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
           <div className="space-y-1">
             <p className="text-sm font-medium leading-none">
-              搶票時間
+              最晚出發時間
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {ticket.endTime}
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-sm font-medium leading-none">
+              搶票日
             </p>
             <p className="text-sm text-muted-foreground">
               {formatDate(ticket.execDay)}
@@ -68,5 +68,5 @@ function formatDate(date: Date): string {
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
   const day = String(date.getDate()).padStart(2, '0');
 
-  return `${year}-${month}-${day}`;
+  return `${year}/${month}/${day}`;
 }
