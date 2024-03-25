@@ -8,17 +8,18 @@ import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from '@/components/ui/use-toast'
-import { redirect } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 
 export default function SignInForm() {
-
   const form = useForm<{ username: string, password: string }>({
     defaultValues: { username: "", password: "" }
   })
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
 
   const onAction = async () => {
     const credential = form.getValues()
-    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: "/", redirect: true })
+    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: callbackUrl || "/", redirect: true })
     if (res?.error) {
       toast({
         title: "登入失敗",

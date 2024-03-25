@@ -1,5 +1,8 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import Alert from '@/app/components/alert'
 import prisma from '@/lib/prisma'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/dist/client/components/navigation'
 import React from 'react'
 import CaptchaForm from './captcha-form'
 
@@ -13,6 +16,16 @@ interface ThsrcOrderParams {
 
 export default async function ThsrcOrderPage({ params }: ThsrcOrderProps) {
   const orderId = parseInt(params.id, 10)
+  const session = await getServerSession(authOptions)
+
+  if (!session || !session.user) {
+    redirect("/auth/signin")
+  }
+
+  if (session.error) {
+    return <Alert title="取得使用者資訊失敗" description={session.error}></Alert>
+  }
+
 
   if (isNaN(orderId)) {
     return <Alert title="取得訂單失敗" description="輸入的訂單編號格式不正確！"></Alert>
