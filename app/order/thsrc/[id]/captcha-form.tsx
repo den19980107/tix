@@ -1,5 +1,5 @@
 'use client'
-import { completeOrder } from '@/app/actions/order/complete-order'
+import { setCaptcha } from '@/app/actions/order/complete-order'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { FormButton } from '@/components/ui/form-button'
 import { Input } from '@/components/ui/input'
@@ -27,7 +27,7 @@ export default function CaptchaForm({ order }: CaptchaFormProps) {
   const onAction = async () => {
     const data = form.getValues()
 
-    const err = await completeOrder(data)
+    const err = await setCaptcha(data)
     if (err) {
       toast({
         title: "驗證碼提交失敗",

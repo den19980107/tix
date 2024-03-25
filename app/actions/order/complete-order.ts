@@ -2,8 +2,8 @@ import { ActionError } from "@/types/action"
 import { CompleteOrder } from "@/types/complete-order"
 import { redirect } from "next/navigation"
 
-export async function completeOrder(data: CompleteOrder): Promise<ActionError> {
-  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/complete`
+export async function setCaptcha(data: CompleteOrder): Promise<ActionError> {
+  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/setCaptcha`
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
