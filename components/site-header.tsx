@@ -23,7 +23,7 @@ export function SiteHeader() {
                 <Avatar>
                   <AvatarFallback>{session.user?.username[0].toUpperCase()}</AvatarFallback>
                 </Avatar>
-                <Button variant="ghost" onClick={() => signOut()}>
+                <Button variant="ghost" onClick={() => signOut({ redirect: true })}>
                   <LogOutIcon className="mr-2"></LogOutIcon>
                   Logout
                 </Button>
