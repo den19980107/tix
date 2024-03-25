@@ -32,7 +32,7 @@ export default async function ThsrcOrderPage({ params }: ThsrcOrderProps) {
   }
 
 
-  const order = await prisma.order.findFirst({ where: { id: orderId } })
+  const order = await prisma.order.findFirst({ where: { id: orderId, creatorId: session.user.id } })
 
   if (!order) {
     return <Alert title="取得訂單失敗" description="找不到此訂單！"></Alert>
