@@ -33,7 +33,6 @@ export async function updateUser(user: UpdateUser): Promise<ActionError> {
         id: user.id,
       },
       data: {
-        username: user.username,
         idNumber: user.idNumber,
         phoneNumber: user.phoneNumber,
       }

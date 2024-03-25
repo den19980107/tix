@@ -15,7 +15,6 @@ type ProfileProps = {
 export default function ProfileForm({ user }: ProfileProps) {
   const defaultValues: UpdateUser = {
     id: user.id,
-    username: user.username,
     idNumber: user.idNumber,
     phoneNumber: user.phoneNumber
   }
@@ -45,19 +44,6 @@ export default function ProfileForm({ user }: ProfileProps) {
       className="space-y-8"
     >
       <Form {...form}>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>使用者名稱</FormLabel>
-              <FormControl>
-                <Input type="text" className="w-full md:w-[300px]" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="idNumber"

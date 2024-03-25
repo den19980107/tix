@@ -7,7 +7,6 @@ export type CreateUser = {
 
 export type UpdateUser = {
   id: number
-  username: string
   phoneNumber: string
   idNumber: string
 }
