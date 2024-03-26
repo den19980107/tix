@@ -31,4 +31,5 @@ model Order {
   updatedAt    DateTime @updatedAt
   captcha      String
   jsessionId   String
+  status       String   @default("pending")
 }

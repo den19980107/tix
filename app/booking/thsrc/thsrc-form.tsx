@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import StationSelector from "./station-selector";
-import { CreateThsrcTicket } from "@/types/thsrc-ticket";
+import { CreateThsrcTicket, ThsrcTicketStatus } from "@/types/thsrc-ticket";
 import { useToast } from "@/components/ui/use-toast";
 import { createThsrcOrder } from "@/app/actions/booking/thsrc";
 import { FormButton } from "@/components/ui/form-button";
@@ -35,7 +35,8 @@ export default function ThsrcForm() {
     execDay: now,
     creatorId: session?.user?.id,
     captcha: "",
-    jsessionId: ""
+    jsessionId: "",
+    status: ThsrcTicketStatus.pending,
   }
 
   const form = useForm<CreateThsrcTicket>({

@@ -1,11 +1,12 @@
 import { deleteThsrcOrder } from '@/app/actions/booking/thsrc'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { FormButton } from '@/components/ui/form-button'
-import { getThsrcStationName, ThsrcTicket } from '@/types/thsrc-ticket'
+import { getThsrcStationName, ThsrcTicket, ThsrcTicketStatus } from '@/types/thsrc-ticket'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 type ThsrcCardProps = {
   className?: string
@@ -13,10 +14,28 @@ type ThsrcCardProps = {
 }
 
 export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
+  let variant: 'default' | 'outline' | 'destructive'
+  switch (ticket.status) {
+    case ThsrcTicketStatus.pending:
+      variant = 'outline'
+      break
+    case ThsrcTicketStatus.complete:
+      variant = 'default'
+      break
+    case ThsrcTicketStatus.failed:
+      variant = 'destructive'
+      break
+  }
+
   return (
     <Card className={className} >
       <CardHeader>
-        <CardDescription>{formatDate(ticket.departureDay)}</CardDescription>
+        <div className="flex justify-between">
+          <CardDescription >
+            {formatDate(ticket.departureDay)}
+          </CardDescription>
+          <Badge variant={variant}> {ticket.status}</Badge>
+        </div>
         <CardTitle className="flex text-lg">
           {getThsrcStationName(ticket.from)}
           <ArrowRightIcon className="mx-2"></ArrowRightIcon>

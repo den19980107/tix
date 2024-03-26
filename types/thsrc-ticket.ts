@@ -9,6 +9,7 @@ export type ThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
+  status: ThsrcTicketStatus
 }
 
 export type CreateThsrcTicket = {
@@ -21,6 +22,13 @@ export type CreateThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
+  status: ThsrcTicketStatus
+}
+
+export enum ThsrcTicketStatus {
+  pending = "pending",
+  complete = "complete",
+  failed = "failed"
 }
 
 export function getThsrcStationName(stationId: string): string {
