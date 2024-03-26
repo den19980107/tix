@@ -12,15 +12,15 @@ export async function setCaptcha(data: CompleteOrder): Promise<ActionError> {
     body: JSON.stringify(data)
   })
 
-  console.log(`complete order with api: ${apiUrl} payload: ${data}`)
-
   const json = await res.json()
 
   if (res.status != 200) {
+    console.log(`set order captcha failed, res: ${JSON.stringify(res)}`)
     return {
       message: json.error
     }
   }
 
+  console.log(`set order captcha sucess, redirect to home page`)
   redirect("/")
 }
