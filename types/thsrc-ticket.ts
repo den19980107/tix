@@ -9,7 +9,7 @@ export type ThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
-  status: ThsrcTicketStatus
+  status: string
 }
 
 export type CreateThsrcTicket = {
@@ -22,7 +22,7 @@ export type CreateThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
-  status: ThsrcTicketStatus
+  status: string
 }
 
 export enum ThsrcTicketStatus {

@@ -6,7 +6,7 @@ import { FormButton } from '@/components/ui/form-button'
 import { getThsrcStationName, ThsrcTicket, ThsrcTicketStatus } from '@/types/thsrc-ticket'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 
 type ThsrcCardProps = {
   className?: string
@@ -14,7 +14,7 @@ type ThsrcCardProps = {
 }
 
 export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
-  let variant: 'default' | 'outline' | 'destructive'
+  let variant: 'default' | 'outline' | 'destructive' = 'outline'
   switch (ticket.status) {
     case ThsrcTicketStatus.pending:
       variant = 'outline'
