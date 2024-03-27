@@ -22,18 +22,20 @@ This project supports automatically booking the following types of tickets
 
 ## Demo
 
-* Home page![截圖 2024-03-27 下午5.10.43](https://i.imgur.com/pmepya5.png)
+* Home page
+
+  ![截圖 2024-03-27 下午5.10.43](https://i.imgur.com/pmepya5.png)
 
 * Booking page
-  
+
   ![截圖 2024-03-27 下午5.11.24](https://i.imgur.com/WvBsDun.png)
 
 * Settubg page
-  
+
   ![截圖 2024-03-27 下午5.11.57](https://i.imgur.com/SaS5APi.png)
 
 * Booking result
-  
+
   ![IMG_5619](https://i.imgur.com/U4ALDNO.png)
 
 ## Getting Started
@@ -45,28 +47,28 @@ this repo is only the font end of `tix`, you should running the [tix-worker](htt
 ### Installation
 
 1. clone this project
-   
+
    ```shell
    git clone https://github.com/den19980107/tix.git
    ```
 
 2. install dependency
-   
+
    ```shell
    npm install or yarn install
    ```
 
 3. running locally
-   
+
    ```shell
    npm run dev
    ```
 
 4. build
-   
+
    ```shell
    docker build --platform=linux/amd64  -t den19980107/tix .
    docker push den19980107/tix:latest
    ```
 
-### 
+###
