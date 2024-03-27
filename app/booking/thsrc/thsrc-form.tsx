@@ -43,6 +43,11 @@ export default function ThsrcForm() {
     defaultValues: defaultValues
   })
 
+  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    form.setValue("startTime", e.target.value)
+    form.setValue("endTime", e.target.value)
+  }
+
   const onAction = async () => {
     const ticket = form.getValues()
     const err = await createThsrcOrder(ticket)
@@ -151,7 +156,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最早出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-full md:w-[300px]" {...field} />
+                  <Input type="time" className="w-full md:w-[300px]" {...field} onChange={handleStartTimeChange} />
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間早的票
@@ -167,7 +172,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最晚出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-full md:w-[300px]" {...field} />
+                  <Input type="time" className="w-full md:w-[300px]" {...field} min={form.getValues().startTime} />
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間晚的票
