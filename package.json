@@ -11,7 +11,8 @@
     "preview": "next build && next start",
     "typecheck": "tsc --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
+    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
+    "deploy": "docker build --platform=linux/amd64  -t den19980107/tix . && docker push den19980107/tix:latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
