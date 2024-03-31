@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { FormButton } from '@/components/ui/form-button'
-import { getThsrcStationName, ThsrcTicket, ThsrcTicketStatus } from '@/types/thsrc-ticket'
+import { getThsrcStationName, getThsrcStatusName, ThsrcTicket, ThsrcTicketStatus } from '@/types/thsrc-ticket'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -34,7 +34,7 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
           <CardDescription >
             {formatDate(ticket.departureDay)}
           </CardDescription>
-          <Badge variant={variant}> {ticket.status}</Badge>
+          <Badge variant={variant}> {getThsrcStatusName(ticket.status)}</Badge>
         </div>
         <CardTitle className="flex text-lg">
           {getThsrcStationName(ticket.from)}

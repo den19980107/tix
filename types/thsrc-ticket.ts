@@ -9,7 +9,7 @@ export type ThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
-  status: string
+  status: ThsrcTicketStatus
 }
 
 export type CreateThsrcTicket = {
@@ -22,13 +22,24 @@ export type CreateThsrcTicket = {
   creatorId: number
   captcha: string
   jsessionId: string
-  status: string
+  status: ThsrcTicketStatus
 }
 
 export enum ThsrcTicketStatus {
   pending = "pending",
   complete = "complete",
   failed = "failed"
+}
+
+export function getThsrcStatusName(status: ThsrcTicketStatus): string {
+  switch (status) {
+    case ThsrcTicketStatus.pending:
+      return "準備中"
+    case ThsrcTicketStatus.complete:
+      return "完成"
+    case ThsrcTicketStatus.failed:
+      return "失敗"
+  }
 }
 
 export function getThsrcStationName(stationId: string): string {
