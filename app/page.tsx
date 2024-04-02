@@ -8,7 +8,7 @@ import PageHeader from "./page-header"
 
 export default async function IndexPage() {
   const session = await getServerSession(authOptions);
-  const orders = await prisma.order.findMany({ where: { creatorId: session?.user?.id } })
+  const orders = await prisma.order.findMany({ where: { creatorId: session?.user?.id }, orderBy: { execDay: "desc" } })
 
   return (
     <div className="space-y-6 py-10 md:block md:p-10">

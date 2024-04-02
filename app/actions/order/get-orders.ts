@@ -7,6 +7,6 @@ export async function getOrders(userId: number, status: ThsrcTicketStatus | null
   if (status) {
     filter["status"] = status
   }
-  const orders = await prisma.order.findMany({ where: filter })
+  const orders = await prisma.order.findMany({ where: filter, orderBy: { execDay: "desc" } })
   return orders as ThsrcTicket[]
 }
