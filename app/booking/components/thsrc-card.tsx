@@ -70,11 +70,11 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="secondary">
+      <CardFooter className="flex">
+        <Button variant="secondary" className="mr-auto" disabled={ticket.status !== ThsrcTicketStatus.pending}>
           <Link href={`/order/thsrc/${ticket.id}`}>輸入驗證碼</Link>
         </Button>
-        <form action={async () => deleteThsrcOrder(ticket.id)}>
+        <form action={async () => deleteThsrcOrder(ticket.id)} className="ml-auto">
           <FormButton>刪除</FormButton>
         </form>
       </CardFooter>
