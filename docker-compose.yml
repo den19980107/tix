@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3003:3000"
+    env_file:
+      - stack.env
   worker:
     build:
       context: https://github.com/den19980107/tix-worker.git#main
