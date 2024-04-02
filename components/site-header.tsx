@@ -18,15 +18,16 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} isLogin={!!session} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
+            <ThemeToggle />
             {session && session.user && session.user.username && session.user.username.length > 0 ?
               <>
-                <Avatar>
-                  <AvatarFallback>{session.user?.username[0].toUpperCase()}</AvatarFallback>
-                </Avatar>
                 <Button variant="ghost" onClick={() => signOut({ redirect: true })}>
                   <LogOutIcon className="mr-2"></LogOutIcon>
                   Logout
                 </Button>
+                <Avatar>
+                  <AvatarFallback>{session.user?.username[0].toUpperCase()}</AvatarFallback>
+                </Avatar>
               </>
               :
               <>
@@ -38,7 +39,6 @@ export function SiteHeader() {
                 </Link>
               </>
             }
-            <ThemeToggle />
           </nav>
         </div>
       </div>
