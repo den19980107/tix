@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+  worker:
+    build:
+      context: https://github.com/den19980107/tix-worker.git#main
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
