@@ -30,7 +30,7 @@ This project supports automatically booking the following types of tickets
 
   ![截圖 2024-03-27 下午5.11.24](https://i.imgur.com/WvBsDun.png)
 
-* Settubg page
+* Setting page
 
   ![截圖 2024-03-27 下午5.11.57](https://i.imgur.com/SaS5APi.png)
 
