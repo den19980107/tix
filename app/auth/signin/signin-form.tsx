@@ -19,7 +19,7 @@ export default function SignInForm() {
 
   const onAction = async () => {
     const credential = form.getValues()
-    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: callbackUrl || "/", redirect: true })
+    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: callbackUrl || "/", redirect: false })
     if (res?.error) {
       toast({
         title: "登入失敗",
