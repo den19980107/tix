@@ -50,8 +50,11 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>帳號</FormLabel>
               <FormControl>
-                <Input type="email" required className="w-full md:w-[300px]" {...field} />
+                <Input type="email" required className="w-full md:w-[300px]" placeholder="user@tix.com" {...field} />
               </FormControl>
+              <FormDescription className="mt-2 mb-2">
+                請使用 email 作為您的帳號
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -63,7 +66,7 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>密碼</FormLabel>
               <FormControl>
-                <Input type="password" required className="w-full md:w-[300px]" {...field} />
+                <Input type="password" required className="w-full md:w-[300px]" placeholder="**********" {...field} />
               </FormControl>
             </FormItem>
           )}
