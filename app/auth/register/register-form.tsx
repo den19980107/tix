@@ -50,7 +50,7 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>帳號</FormLabel>
               <FormControl>
-                <Input type="email" className="w-full md:w-[300px]" {...field} />
+                <Input type="email" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -63,7 +63,7 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>密碼</FormLabel>
               <FormControl>
-                <Input type="password" className="w-full md:w-[300px]" {...field} />
+                <Input type="password" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -77,7 +77,7 @@ export default function RegisterForm() {
               <FormLabel>身分證字號</FormLabel>
               <FormControl>
                 <div className="flex w-full max-w-sm items-center space-x-2">
-                  <Input type="text" className="w-full md:w-[300px]" {...field} />
+                  <Input type="text" required className="w-full md:w-[300px]" {...field} />
                   <Button type="button" onClick={() => form.setValue("idNumber", new TaiwanIdNumberGenerator().generate())}>
                     <RotateCw></RotateCw>
                   </Button>
@@ -97,7 +97,7 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>手機號碼</FormLabel>
               <FormControl>
-                <Input type="tel" className="w-full md:w-[300px]" {...field} />
+                <Input type="tel" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
             </FormItem>
           )}

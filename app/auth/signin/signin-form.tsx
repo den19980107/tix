@@ -42,7 +42,7 @@ export default function SignInForm() {
             <FormItem className="flex-1">
               <FormLabel>帳號</FormLabel>
               <FormControl>
-                <Input type="email" className="w-full md:w-[300px]" {...field} />
+                <Input type="email" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -55,7 +55,7 @@ export default function SignInForm() {
             <FormItem className="flex-1">
               <FormLabel>密碼</FormLabel>
               <FormControl>
-                <Input type="password" className="w-full md:w-[300px]" {...field} />
+                <Input type="password" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
             </FormItem>
           )}
