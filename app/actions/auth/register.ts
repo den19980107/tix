@@ -51,6 +51,19 @@ export async function createUser(user: CreateUser): Promise<ActionError> {
 }
 
 export async function updateUser(user: UpdateUser): Promise<ActionError> {
+  // validate input
+  if (!isNationalIdentificationNumberValid(user.idNumber)) {
+    return {
+      message: `輸入的身分證字號無效`
+    }
+  }
+
+  if (!isPhoneNumberValid(user.phoneNumber)) {
+    return {
+      message: `輸入的電話號碼無效`
+    }
+  }
+
   try {
     await prisma.user.update({
       where: {
