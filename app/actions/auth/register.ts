@@ -8,6 +8,7 @@ import { hash } from 'bcrypt'
 import { revalidatePath } from "next/cache";
 import { isNationalIdentificationNumberValid } from "./id-number-validator";
 import { isPhoneNumberValid } from "./phone-number-validator";
+import { Prisma } from "@prisma/client";
 
 const saltRounds = 10;
 
@@ -33,9 +34,16 @@ export async function createUser(user: CreateUser): Promise<ActionError> {
       data: user,
     })
   } catch (err) {
-    console.log(`create user failed, err: ${err}`)
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === 'P2002') {
+        return {
+          message: `您輸入的帳號 "${user.username}" 已經被使用過了，請選擇別的使用者名稱`
+        }
+      }
+    }
+
     return {
-      message: `系統錯誤，請稍後再試`
+      message: "系統錯誤，請稍後再試"
     }
   }
 
