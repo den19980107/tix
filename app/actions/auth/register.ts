@@ -6,10 +6,25 @@ import { CreateUser, UpdateUser } from "@/types/auth";
 import { redirect } from "next/navigation";
 import { hash } from 'bcrypt'
 import { revalidatePath } from "next/cache";
+import { isNationalIdentificationNumberValid } from "./id-number-validator";
+import { isPhoneNumberValid } from "./phone-number-validator";
 
 const saltRounds = 10;
 
 export async function createUser(user: CreateUser): Promise<ActionError> {
+  // validate input
+  if (!isNationalIdentificationNumberValid(user.idNumber)) {
+    return {
+      message: `輸入的身分證字號無效`
+    }
+  }
+
+  if (!isPhoneNumberValid(user.phoneNumber)) {
+    return {
+      message: `輸入的電話號碼無效`
+    }
+  }
+
   try {
     const hashedPassword = await hash(user.password, saltRounds)
     user.password = hashedPassword
@@ -18,8 +33,9 @@ export async function createUser(user: CreateUser): Promise<ActionError> {
       data: user,
     })
   } catch (err) {
+    console.log(`create user failed, err: ${err}`)
     return {
-      message: `create user failed, err: ${err}`
+      message: `系統錯誤，請稍後再試`
     }
   }
 
