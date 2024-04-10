@@ -5,9 +5,12 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } fr
 import { FormButton } from '@/components/ui/form-button'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
+import { RotateCw } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { TaiwanIdNumberGenerator } from './system-generated-id-number'
 
 export default function RegisterForm() {
 
@@ -74,8 +77,16 @@ export default function RegisterForm() {
             <FormItem className="flex-1">
               <FormLabel>身分證字號</FormLabel>
               <FormControl>
-                <Input type="text" className="w-full md:w-[300px]" {...field} />
+                <div className="flex w-full max-w-sm items-center space-x-2">
+                  <Input type="text" className="w-full md:w-[300px]" {...field} />
+                  <Button type="button" onClick={() => form.setValue("idNumber", new TaiwanIdNumberGenerator().generate())}>
+                    <RotateCw></RotateCw>
+                  </Button>
+                </div>
               </FormControl>
+              <FormDescription className="mt-2 mb-2">
+                領票時需使用此身分證字號末四碼，如使用隨機產生請記住此身份證號碼
+              </FormDescription>
             </FormItem>
           )}
         />
