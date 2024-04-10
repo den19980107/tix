@@ -39,7 +39,7 @@ export default async function ThsrcOrderPage({ params }: ThsrcOrderProps) {
   }
 
   if (order.captcha === "" || order.jsessionId === "") {
-    return <Alert title="訂單尚未被執行" description="請在收到通知輸入驗證碼 email 後在打開此頁面"></Alert>
+    return <Alert title="訂單尚未被執行" description="請在收到通知輸入驗證碼 email 後再打開此頁面"></Alert>
   }
 
   return (
