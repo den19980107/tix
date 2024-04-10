@@ -99,6 +99,9 @@ export default function RegisterForm() {
               <FormControl>
                 <Input type="tel" required className="w-full md:w-[300px]" {...field} />
               </FormControl>
+              <FormDescription className="mt-2 mb-2">
+                請務必輸入正確的手機號碼，避免無法收到訂票網站的簡訊
+              </FormDescription>
             </FormItem>
           )}
         />
