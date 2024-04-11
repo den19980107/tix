@@ -1,7 +1,7 @@
 'use client'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { FormButton } from '@/components/ui/form-button'
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Input } from '@/components/ui/input'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
@@ -14,12 +14,13 @@ export default function SignInForm() {
   const form = useForm<{ username: string, password: string }>({
     defaultValues: { username: "", password: "" }
   })
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl')
+  // const searchParams = useSearchParams()
+  // TODO: 檢查是不是這個 call back url 讓 home lab 上的 tix 沒辦法正確在登入後回到主畫面
+  // const callbackUrl = searchParams.get('callbackUrl')
 
   const onAction = async () => {
     const credential = form.getValues()
-    const res = await signIn("credentials", { username: credential.username, password: credential.password, callbackUrl: callbackUrl || "/", redirect: false })
+    const res = await signIn("credentials", { username: credential.username, password: credential.password, redirect: false })
     if (res?.error) {
       toast({
         title: "登入失敗",
