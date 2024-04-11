@@ -17,6 +17,8 @@ interface CaptchaFormProps {
 }
 
 export default function CaptchaForm({ order }: CaptchaFormProps) {
+  console.log("captcha form", process.env.NEXT_PUBLIC_TIX_WORKER_URL)
+
   const form = useForm<CompleteOrder>({
     defaultValues: {
       id: order.id,
