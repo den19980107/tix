@@ -30,7 +30,7 @@ export default function SignInForm() {
     }
 
     if (res?.url) {
-      redirect(res?.url)
+      redirect(res.url)
     }
 
     redirect("/")
