@@ -3,7 +3,7 @@ import { CompleteOrder } from "@/types/complete-order"
 import { redirect } from "next/navigation"
 
 export async function setCaptcha(data: CompleteOrder): Promise<ActionError> {
-  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/setCaptcha`
+  const apiUrl = `${process.env.NEXT_PUBLIC_TIX_WORKER_URL}/api/order/setCaptcha`
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
