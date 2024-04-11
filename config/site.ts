@@ -7,7 +7,7 @@ export const siteConfig = {
   mainNav: [
     {
       title: "首頁",
-      href: "/",
+      href: "/home",
     },
     {
       title: "訂票",

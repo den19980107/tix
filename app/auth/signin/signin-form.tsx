@@ -33,7 +33,7 @@ export default function SignInForm() {
       redirect(res.url)
     }
 
-    redirect("/")
+    redirect("/home")
   }
   return (
     <form
