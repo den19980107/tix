@@ -1,6 +1,6 @@
 'use client'
 import { ThsrcTicket } from "@/types/thsrc-ticket"
-import ThsrcCard from "../booking/components/thsrc-card"
+import ThsrcCard from "./thsrc-card"
 
 type ThsrcTicketListProps = {
   orders: ThsrcTicket[]
