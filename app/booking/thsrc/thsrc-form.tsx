@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -16,6 +15,7 @@ import { createThsrcOrder } from "@/app/actions/booking/thsrc";
 import { FormButton } from "@/components/ui/form-button";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import DepartureTimeSelector from "./departure-time-selector";
 
 export default function ThsrcForm() {
   const { data: session } = useSession()
@@ -44,9 +44,9 @@ export default function ThsrcForm() {
     defaultValues: defaultValues
   })
 
-  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    form.setValue("startTime", e.target.value)
-    form.setValue("endTime", e.target.value)
+  const handleStartTimeChange = (value: string) => {
+    form.setValue("startTime", value)
+    form.setValue("endTime", value)
   }
 
   const onAction = async () => {
@@ -157,7 +157,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最早出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-full md:w-[300px]" {...field} onChange={handleStartTimeChange} />
+                  <DepartureTimeSelector {...field} onChange={handleStartTimeChange}></DepartureTimeSelector>
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間早的票
@@ -173,7 +173,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最晚出發時間</FormLabel>
                 <FormControl>
-                  <Input type="time" className="w-full md:w-[300px]" {...field} min={form.getValues().startTime} />
+                  <DepartureTimeSelector {...field}></DepartureTimeSelector>
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間晚的票
@@ -254,6 +254,14 @@ const getStartAndEndTime = (date: Date): GetStartAndEndHourTime => {
 
   if (endHour >= 24) {
     endHour = endHour - 24
+  }
+
+  if (startHour < 5 && startHour > 0) {
+    startHour = 5
+  }
+
+  if (endHour < 5 && endHour > 0) {
+    endHour = startHour
   }
 
 
