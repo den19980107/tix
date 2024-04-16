@@ -37,6 +37,7 @@ export default function ThsrcForm() {
     captcha: "",
     jsessionId: "",
     status: ThsrcTicketStatus.pending,
+    errorMessage: ""
   }
 
   const form = useForm<CreateThsrcTicket>({
