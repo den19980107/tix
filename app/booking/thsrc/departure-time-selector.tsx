@@ -1,14 +1,14 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { SelectProps } from "@radix-ui/react-select";
 import React from 'react'
-import { ControllerRenderProps } from 'react-hook-form';
 
 
-export default function DepartureTimeSelector(props: ControllerRenderProps<any, any>) {
+export default function DepartureTimeSelector(props: SelectProps) {
   const time = generateTimes()
 
   return (
-    <Select {...props} onValueChange={props.onChange}>
-      <SelectTrigger className="w-[280px]">
+    <Select {...props} >
+      <SelectTrigger className="w-full md:w-[300px] pl-3 text-left font-normal">
         <SelectValue placeholder="Select a timezone" />
       </SelectTrigger>
       <SelectContent>

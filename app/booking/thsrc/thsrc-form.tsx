@@ -157,7 +157,7 @@ export default function ThsrcForm() {
               <FormItem className="flex-1">
                 <FormLabel>最早出發時間</FormLabel>
                 <FormControl>
-                  <DepartureTimeSelector {...field} onChange={handleStartTimeChange}></DepartureTimeSelector>
+                  <DepartureTimeSelector {...field} onValueChange={handleStartTimeChange}></DepartureTimeSelector>
                 </FormControl>
                 <FormDescription>
                   系統不會搶比這個時間早的票
