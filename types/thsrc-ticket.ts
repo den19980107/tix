@@ -10,6 +10,7 @@ export type ThsrcTicket = {
   captcha: string
   jsessionId: string
   status: ThsrcTicketStatus
+  errorMessage: string
 }
 
 export type CreateThsrcTicket = {
@@ -23,6 +24,7 @@ export type CreateThsrcTicket = {
   captcha: string
   jsessionId: string
   status: ThsrcTicketStatus
+  errorMessage: string
 }
 
 export enum ThsrcTicketStatus {

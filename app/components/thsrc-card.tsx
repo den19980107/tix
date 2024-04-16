@@ -68,6 +68,17 @@ export default function ThsrcCard({ ticket, className }: ThsrcCardProps) {
               {formatDate(ticket.execDay)}
             </p>
           </div>
+
+          {ticket.status === ThsrcTicketStatus.failed &&
+            <div className="space-y-1">
+              <p className="text-sm font-medium leading-none">
+                錯誤訊息
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {ticket.errorMessage}
+              </p>
+            </div>
+          }
         </div>
       </CardContent>
       <CardFooter className="flex">
