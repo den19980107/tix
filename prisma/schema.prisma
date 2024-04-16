@@ -32,4 +32,5 @@ model Order {
   captcha      String
   jsessionId   String
   status       String   @default("pending")
+  errorMessage String   @default("")
 }
