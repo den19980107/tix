@@ -15,7 +15,7 @@ services:
       context: https://github.com/den19980107/tix-worker.git#main
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3004:8080"
     env_file:
       - stack.env
     pull_policy: build
