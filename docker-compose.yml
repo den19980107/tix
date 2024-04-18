@@ -10,6 +10,7 @@ services:
     env_file:
       - stack.env
     pull_policy: build
+    restart: unless-stopped
   worker:
     build:
       context: https://github.com/den19980107/tix-worker.git#main
@@ -19,3 +20,4 @@ services:
     env_file:
       - stack.env
     pull_policy: build
+    restart: unless-stopped
