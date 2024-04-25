@@ -1,17 +1,18 @@
 'use server'
 import { ActionError } from "@/types/action"
-import { CompleteOrder } from "@/types/complete-order"
 import { redirect } from "next/navigation"
 import fetch from 'node-fetch'
 
-export async function setCaptcha(data: CompleteOrder): Promise<ActionError> {
-  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/setCaptcha`
+export async function completeOrder(orderId: number, captcha: string): Promise<ActionError> {
+  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/${orderId}/setCaptcha`
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      captcha: captcha
+    })
   })
 
   const json: any = await res.json()
