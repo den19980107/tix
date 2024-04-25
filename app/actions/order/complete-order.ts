@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import fetch from 'node-fetch'
 
 export async function completeOrder(orderId: number, captcha: string): Promise<ActionError> {
-  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/${orderId}/setCaptcha`
+  const apiUrl = `${process.env.TIX_WORKER_URL}/api/order/${orderId}/completeOrder`
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
