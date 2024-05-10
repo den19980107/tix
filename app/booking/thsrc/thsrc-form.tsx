@@ -49,6 +49,24 @@ export default function ThsrcForm() {
     form.setValue("endTime", value)
   }
 
+  const handleDepartureDayChange = (departureDay: Date | undefined) => {
+    if (departureDay) {
+      form.setValue("departureDay", departureDay)
+
+      let execDay = new Date(departureDay.setDate(departureDay.getDate() - 29))
+
+      // 如果最早執行時間是禮拜六或禮拜日，可以往前推到禮拜五
+      switch (execDay.getDay()) {
+        case 6:
+          execDay = new Date(execDay.setDate(execDay.getDay() - 1))
+        case 0:
+          execDay = new Date(execDay.setDate(execDay.getDay() - 2))
+      }
+
+      form.setValue("execDay", execDay)
+    }
+  }
+
   const onAction = async () => {
     const ticket = form.getValues()
     const err = await createThsrcOrder(ticket)
@@ -136,7 +154,7 @@ export default function ThsrcForm() {
                   <Calendar
                     mode="single"
                     selected={field.value}
-                    onSelect={field.onChange}
+                    onSelect={handleDepartureDayChange}
                     initialFocus
                   />
                 </PopoverContent>
